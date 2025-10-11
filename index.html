@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Saiful Islam - Research Engineer & PhD Candidate</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Md Saiful Islam</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#research" class="nav-link">Research</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#experience" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Md Saiful Islam</h1>
+                <h2 class="hero-subtitle">PhD Candidate in Systems Engineering</h2>
+                <p class="hero-description">
+                    Advancing orthopedic biomechanics through multi-scale finite element modeling, 
+                    AI-powered solutions, and innovative research in soft materials and biomechanics.
+                </p>
+                <div class="hero-specialties">
+                    <span class="specialty">Finite Element Analysis</span>
+                    <span class="specialty">Biomechanics</span>
+                    <span class="specialty">AI & VR</span>
+                    <span class="specialty">Materials Science</span>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#research" class="btn btn-primary">View Research</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-placeholder">
+                    <i class="fas fa-microscope"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I am a PhD candidate in Systems Engineering (Mechanical Engineering) at the University of Louisiana at Lafayette, 
+                        with over 4 years of hands-on experience in Finite Element Analysis using ABAQUS and Python scripting.
+                    </p>
+                    <p>
+                        My research focuses on advancing orthopedic biomechanics through the development of multi-scale finite element 
+                        models of articular cartilage and markerless motion capture frameworks. This work aims to improve osteoarthritis 
+                        risk prediction and support real-world clinical and military health applications.
+                    </p>
+                    <div class="achievements">
+                        <div class="achievement">
+                            <h3>4+</h3>
+                            <p>Years of FEA Experience</p>
+                        </div>
+                        <div class="achievement">
+                            <h3>2</h3>
+                            <p>Research Publications</p>
+                        </div>
+                        <div class="achievement">
+                            <h3>3</h3>
+                            <p>Years Industrial Experience</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="research">
+        <div class="container">
+            <h2 class="section-title">Research Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be dynamically loaded here -->
+            </div>
+            <div class="add-project-btn-container">
+                <button class="btn btn-add" onclick="openProjectModal()">
+                    <i class="fas fa-plus"></i> Add New Project
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Aug 2021 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Research Assistant</h3>
+                        <h4>4MLab | UL Lafayette</h4>
+                        <p>Advancing orthopedic biomechanics at UL Lafayette by developing multi-scale finite element models of articular cartilage and markerless motion capture frameworks, improving osteoarthritis risk prediction and supporting real-world clinical and military health applications.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2025 - Aug 2025</div>
+                    <div class="timeline-content">
+                        <h3>Tech Intern</h3>
+                        <h4>Opportunity Machine</h4>
+                        <p>Designed and implemented an AI-powered model to analyze human ear anatomy and identify safe piercing locations and developed an integrated virtual reality simulation system to overlay jewelry at those sites, providing users with a safe, personalized, and interactive preview experience prior to actual piercing.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2024 - Aug 2024</div>
+                    <div class="timeline-content">
+                        <h3>Research Assistant</h3>
+                        <h4>Trans Lab | Michigan Tech</h4>
+                        <p>Developed non-contact ultrasonic methods to study concrete mechanical properties, improving construction material analysis with a combination of computer simulations and experiments. Additionally, set up a modern laboratory with essential equipment like a Velmex Unislide and Laser Vibrometer to enhance research capabilities.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2019 - Aug 2021</div>
+                    <div class="timeline-content">
+                        <h3>Service Advisor</h3>
+                        <h4>AUDI</h4>
+                        <p>Led the introduction of mild hybrid technology in Bangladesh, enhancing service efficiency, optimizing inventory and supplier management, and ensuring Audi's quality standards through technical and warranty coordination.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Modeling & Simulation</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">ABAQUS (Standard & Explicit)</span>
+                        <span class="skill-item">Python Scripting</span>
+                        <span class="skill-item">Finite Element Analysis</span>
+                        <span class="skill-item">Multi-scale Modeling</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Programming & Analysis</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">MATLAB</span>
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">OriginPro</span>
+                        <span class="skill-item">Machine Learning</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Emerging Technologies</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">AI-Powered Systems</span>
+                        <span class="skill-item">VR Simulations</span>
+                        <span class="skill-item">Computer Vision</span>
+                        <span class="skill-item">Non-destructive Testing</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Research & Communication</h3>
+                    <div class="skill-items">
+                        <span class="skill-item">Technical Writing</span>
+                        <span class="skill-item">Conference Presentations</span>
+                        <span class="skill-item">Research Publications</span>
+                        <span class="skill-item">Team Leadership</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="publications">
+        <div class="container">
+            <h2 class="section-title">Publications & Awards</h2>
+            <div class="publications-content">
+                <div class="awards">
+                    <h3>Awards & Recognition</h3>
+                    <ul>
+                        <li>Best research abstract award at Southern Biomedical Engineering Conference, 2024, Shreveport, LA</li>
+                        <li>Full tuition aid, Mechanical Engineering Department, University of Louisiana at Lafayette (Fall '21 - present)</li>
+                        <li>Full tuition aid, Civil Engineering Department, Michigan Technological University (Spring '24 - Summer '24)</li>
+                        <li>OIC undergraduate study scholarship, Islamic University of Technology (Jan '14 - Nov '17)</li>
+                    </ul>
+                </div>
+                
+                <div class="publications-list">
+                    <h3>Research Publications</h3>
+                    <p>Two research publications authored (details available upon request)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>md-saiful.islam1@louisiana.edu</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>337-455-0914</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <a href="https://linkedin.com/in/md-saiful-islam" target="_blank">LinkedIn Profile</a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal()">&times;</span>
+            <h2 id="modalTitle">Add New Project</h2>
+            <form id="projectForm">
+                <input type="hidden" id="projectId">
+                <div class="form-group">
+                    <label for="projectTitle">Project Title</label>
+                    <input type="text" id="projectTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="projectDescription">Description</label>
+                    <textarea id="projectDescription" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="projectTechnologies">Technologies Used</label>
+                    <input type="text" id="projectTechnologies" placeholder="Separate with commas">
+                </div>
+                <div class="form-group">
+                    <label for="projectImages">Upload Images/Files</label>
+                    <input type="file" id="projectImages" multiple accept="image/*,.pdf,.dwg,.step,.iges">
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Save Project</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeProjectModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Md Saiful Islam. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
