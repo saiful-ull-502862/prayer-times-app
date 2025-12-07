@@ -22,6 +22,7 @@
                 <a href="#prayer-times" class="nav-link">Prayer Times</a>
                 <a href="#settings" class="nav-link">Settings</a>
                 <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </nav>
             <button class="mobile-menu-btn" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
@@ -526,6 +527,98 @@
             <div class="about-footer">
                 <p>Developed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for the Muslim community</p>
                 <p class="disclaimer">Prayer times are for reference. Please verify with your local mosque for exact times.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-envelope"></i>
+                Contact Us
+            </h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-intro">
+                        <h3>Get in Touch</h3>
+                        <p>Have questions, suggestions, or feedback about the Namaz Prayer Reminder app? We'd love to hear from you!</p>
+                    </div>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-mosque"></i>
+                            <div>
+                                <h4>Community Focused</h4>
+                                <p>Built for the Muslim community in the US</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Quick Response</h4>
+                                <p>We aim to respond within 24-48 hours</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <div>
+                                <h4>Suggestions Welcome</h4>
+                                <p>Help us improve the app with your ideas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <!-- Web3Forms Access Key - Replace with your key -->
+                        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+                        <input type="hidden" name="subject" value="New Contact from Namaz Prayer Reminder App">
+                        <input type="hidden" name="from_name" value="Namaz Prayer Reminder">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                        <div class="form-group">
+                            <label for="contactName">
+                                <i class="fas fa-user"></i> Your Name
+                            </label>
+                            <input type="text" id="contactName" name="name" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactEmail">
+                                <i class="fas fa-envelope"></i> Email Address
+                            </label>
+                            <input type="email" id="contactEmail" name="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactSubject">
+                                <i class="fas fa-tag"></i> Subject
+                            </label>
+                            <select id="contactSubject" name="topic" required>
+                                <option value="">Select a subject</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="Feature Request">Feature Request</option>
+                                <option value="Bug Report">Bug Report</option>
+                                <option value="Prayer Time Issue">Prayer Time Issue</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactMessage">
+                                <i class="fas fa-comment-alt"></i> Your Message
+                            </label>
+                            <textarea id="contactMessage" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-submit" id="contactSubmitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+
+                        <div id="formStatus" class="form-status"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>

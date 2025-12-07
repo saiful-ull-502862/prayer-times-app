@@ -1143,9 +1143,103 @@ class NamazReminderApp {
     }
 }
 
+// ==================== Contact Form Handler ====================
+class ContactFormHandler {
+    constructor() {
+        this.form = document.getElementById('contactForm');
+        this.submitBtn = document.getElementById('contactSubmitBtn');
+        this.formStatus = document.getElementById('formStatus');
+
+        if (this.form) {
+            this.init();
+        }
+    }
+
+    init() {
+        this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    async handleSubmit(e) {
+        e.preventDefault();
+
+        // Validate form
+        if (!this.form.checkValidity()) {
+            this.form.reportValidity();
+            return;
+        }
+
+        // Show loading state
+        this.setLoadingState(true);
+        this.hideStatus();
+
+        try {
+            const formData = new FormData(this.form);
+
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                this.showStatus('success', 'JazakAllah Khair! Your message has been sent successfully. We will get back to you soon.');
+                this.form.reset();
+
+                // Show toast notification if available
+                if (window.namazApp && window.namazApp.showToast) {
+                    window.namazApp.showToast('Message sent successfully!', 'success');
+                }
+            } else {
+                throw new Error(result.message || 'Something went wrong');
+            }
+        } catch (error) {
+            console.error('Contact form error:', error);
+            this.showStatus('error', 'Sorry, there was an error sending your message. Please try again or contact us directly.');
+
+            if (window.namazApp && window.namazApp.showToast) {
+                window.namazApp.showToast('Failed to send message', 'error');
+            }
+        } finally {
+            this.setLoadingState(false);
+        }
+    }
+
+    setLoadingState(isLoading) {
+        if (this.submitBtn) {
+            this.submitBtn.disabled = isLoading;
+            this.submitBtn.classList.toggle('loading', isLoading);
+
+            if (isLoading) {
+                this.submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            } else {
+                this.submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+            }
+        }
+    }
+
+    showStatus(type, message) {
+        if (this.formStatus) {
+            this.formStatus.className = `form-status show ${type}`;
+            this.formStatus.innerHTML = `
+                <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+                <span>${message}</span>
+            `;
+        }
+    }
+
+    hideStatus() {
+        if (this.formStatus) {
+            this.formStatus.className = 'form-status';
+            this.formStatus.innerHTML = '';
+        }
+    }
+}
+
 // ==================== Initialize Application ====================
 document.addEventListener('DOMContentLoaded', () => {
     window.namazApp = new NamazReminderApp();
+    window.contactForm = new ContactFormHandler();
 });
 
 // Service Worker Registration for PWA capabilities (optional)
