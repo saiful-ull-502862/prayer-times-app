@@ -2,7 +2,7 @@
 
 A comprehensive Namaz (Salah) prayer time reminder application for Muslims in the United States. Get accurate prayer times based on your location with browser notifications and customizable settings.
 
-**Live Demo**: [Open Namaz Reminder](namaz-reminder.html)
+**Live Demo**: [Open Namaz Reminder](https://saiful-ull-502862.github.io/prayer-times-app/)
 
 ## Features
 
@@ -43,14 +43,14 @@ A comprehensive Namaz (Salah) prayer time reminder application for Muslims in th
 ### Option 1: GitHub Pages (Recommended)
 1. Fork this repository
 2. Enable GitHub Pages in repository settings
-3. Access the app at `https://your-username.github.io/repository-name/namaz-reminder.html`
+3. Access the app at `https://your-username.github.io/prayer-times-app/`
 
 ### Option 2: Local Development
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/namaz-prayer-reminder.git
+   git clone https://github.com/your-username/prayer-times-app.git
    ```
-2. Open `namaz-reminder.html` in your web browser
+2. Open `index.html` in your web browser
 3. Allow location access when prompted
 
 ### Option 3: Local Server
@@ -61,7 +61,7 @@ python -m http.server 8000
 # Using Node.js
 npx http-server
 ```
-Then open `http://localhost:8000/namaz-reminder.html`
+Then open `http://localhost:8000`
 
 ## Configuration
 
@@ -101,14 +101,11 @@ Then open `http://localhost:8000/namaz-reminder.html`
 
 ### Files Structure
 ```
-namaz-prayer-reminder/
-├── namaz-reminder.html    # Main application page
-├── namaz-styles.css       # Styling and themes
-├── namaz-app.js           # Application logic
-├── index.html             # Personal portfolio (optional)
-├── styles.css             # Portfolio styles
-├── script.js              # Portfolio scripts
-└── README.md              # Documentation
+prayer-times-app/
+├── index.html         # Main application page
+├── namaz-styles.css   # Styling and themes
+├── namaz-app.js       # Application logic
+└── README.md          # Documentation
 ```
 
 ### Technologies Used
