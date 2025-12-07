@@ -3,308 +3,562 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Md Saiful Islam - Research Engineer & PhD Candidate</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Namaz Prayer Reminder - US Prayer Times</title>
+    <link rel="stylesheet" href="namaz-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="Namaz Prayer Reminder App - Get accurate prayer times for any US location with browser and email notifications">
+    <meta name="theme-color" content="#1a5f4a">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>Md Saiful Islam</h2>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-mosque"></i>
+                <h1>Namaz Reminder</h1>
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#research" class="nav-link">Research</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#experience" class="nav-link">Experience</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#skills" class="nav-link">Skills</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a href="namaz-reminder.html" class="nav-link nav-link-highlight">Namaz Reminder</a>
-                </li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+            <nav class="nav-links">
+                <a href="#prayer-times" class="nav-link">Prayer Times</a>
+                <a href="#settings" class="nav-link">Settings</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </nav>
+    </header>
 
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">Md Saiful Islam</h1>
-                <h2 class="hero-subtitle">PhD Candidate in Systems Engineering</h2>
-                <p class="hero-description">
-                    Advancing orthopedic biomechanics through multi-scale finite element modeling, 
-                    AI-powered solutions, and innovative research in soft materials and biomechanics.
-                </p>
-                <div class="hero-specialties">
-                    <span class="specialty">Finite Element Analysis</span>
-                    <span class="specialty">Biomechanics</span>
-                    <span class="specialty">AI & VR</span>
-                    <span class="specialty">Materials Science</span>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#research" class="btn btn-primary">View Research</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
+    <!-- Hero Section with Current Prayer -->
+    <section class="hero-section">
+        <div class="islamic-pattern"></div>
+        <div class="hero-content">
+            <div class="current-date">
+                <p class="gregorian-date" id="gregorianDate"></p>
+                <p class="hijri-date" id="hijriDate"></p>
             </div>
-            <div class="hero-image">
-                <div class="hero-placeholder">
-                    <i class="fas fa-microscope"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I am a PhD candidate in Systems Engineering (Mechanical Engineering) at the University of Louisiana at Lafayette, 
-                        with over 4 years of hands-on experience in Finite Element Analysis using ABAQUS and Python scripting.
-                    </p>
-                    <p>
-                        My research focuses on advancing orthopedic biomechanics through the development of multi-scale finite element 
-                        models of articular cartilage and markerless motion capture frameworks. This work aims to improve osteoarthritis 
-                        risk prediction and support real-world clinical and military health applications.
-                    </p>
-                    <div class="achievements">
-                        <div class="achievement">
-                            <h3>4+</h3>
-                            <p>Years of FEA Experience</p>
+            <div class="current-prayer-card">
+                <h2 class="current-label">Current Prayer</h2>
+                <h1 class="current-prayer-name" id="currentPrayer">Loading...</h1>
+                <div class="countdown-container">
+                    <p class="countdown-label">Next prayer in:</p>
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdownHours">00</span>
+                            <span class="countdown-unit">Hours</span>
                         </div>
-                        <div class="achievement">
-                            <h3>2</h3>
-                            <p>Research Publications</p>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdownMinutes">00</span>
+                            <span class="countdown-unit">Minutes</span>
                         </div>
-                        <div class="achievement">
-                            <h3>3</h3>
-                            <p>Years Industrial Experience</p>
+                        <div class="countdown-item">
+                            <span class="countdown-value" id="countdownSeconds">00</span>
+                            <span class="countdown-unit">Seconds</span>
                         </div>
                     </div>
                 </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                </div>
+                <p class="next-prayer-info">Next: <span id="nextPrayerName">--</span> at <span id="nextPrayerTime">--:--</span></p>
             </div>
-        </div>
-    </section>
-
-    <section id="research" class="research">
-        <div class="container">
-            <h2 class="section-title">Research Projects</h2>
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Projects will be dynamically loaded here -->
-            </div>
-            <div class="add-project-btn-container">
-                <button class="btn btn-add" onclick="openProjectModal()">
-                    <i class="fas fa-plus"></i> Add New Project
+            <div class="location-display">
+                <i class="fas fa-map-marker-alt"></i>
+                <span id="locationDisplay">Detecting location...</span>
+                <button class="btn-icon" id="refreshLocation" title="Refresh location">
+                    <i class="fas fa-sync-alt"></i>
                 </button>
             </div>
         </div>
     </section>
 
-    <section id="experience" class="experience">
+    <!-- Prayer Times Section -->
+    <section id="prayer-times" class="prayer-times-section">
         <div class="container">
-            <h2 class="section-title">Professional Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Aug 2021 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Research Assistant</h3>
-                        <h4>4MLab | UL Lafayette</h4>
-                        <p>Advancing orthopedic biomechanics at UL Lafayette by developing multi-scale finite element models of articular cartilage and markerless motion capture frameworks, improving osteoarthritis risk prediction and supporting real-world clinical and military health applications.</p>
+            <h2 class="section-title">
+                <i class="fas fa-clock"></i>
+                Today's Prayer Times
+            </h2>
+            <div class="prayer-cards-grid">
+                <!-- Fajr -->
+                <div class="prayer-card" data-prayer="fajr">
+                    <div class="prayer-icon">
+                        <i class="fas fa-cloud-sun"></i>
                     </div>
+                    <div class="prayer-info">
+                        <h3 class="prayer-name">Fajr</h3>
+                        <p class="prayer-arabic">الفجر</p>
+                        <p class="prayer-time" id="fajrTime">--:--</p>
+                    </div>
+                    <div class="prayer-status" id="fajrStatus"></div>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">June 2025 - Aug 2025</div>
-                    <div class="timeline-content">
-                        <h3>Tech Intern</h3>
-                        <h4>Opportunity Machine</h4>
-                        <p>Designed and implemented an AI-powered model to analyze human ear anatomy and identify safe piercing locations and developed an integrated virtual reality simulation system to overlay jewelry at those sites, providing users with a safe, personalized, and interactive preview experience prior to actual piercing.</p>
+
+                <!-- Sunrise -->
+                <div class="prayer-card sunrise-card" data-prayer="sunrise">
+                    <div class="prayer-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3 class="prayer-name">Sunrise</h3>
+                        <p class="prayer-arabic">الشروق</p>
+                        <p class="prayer-time" id="sunriseTime">--:--</p>
+                    </div>
+                    <div class="prayer-status" id="sunriseStatus"></div>
+                </div>
+
+                <!-- Dhuhr -->
+                <div class="prayer-card" data-prayer="dhuhr">
+                    <div class="prayer-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3 class="prayer-name">Dhuhr</h3>
+                        <p class="prayer-arabic">الظهر</p>
+                        <p class="prayer-time" id="dhuhrTime">--:--</p>
+                    </div>
+                    <div class="prayer-status" id="dhuhrStatus"></div>
+                </div>
+
+                <!-- Asr -->
+                <div class="prayer-card" data-prayer="asr">
+                    <div class="prayer-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3 class="prayer-name">Asr</h3>
+                        <p class="prayer-arabic">العصر</p>
+                        <p class="prayer-time" id="asrTime">--:--</p>
+                    </div>
+                    <div class="prayer-status" id="asrStatus"></div>
+                </div>
+
+                <!-- Maghrib -->
+                <div class="prayer-card" data-prayer="maghrib">
+                    <div class="prayer-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3 class="prayer-name">Maghrib</h3>
+                        <p class="prayer-arabic">المغرب</p>
+                        <p class="prayer-time" id="maghribTime">--:--</p>
+                    </div>
+                    <div class="prayer-status" id="maghribStatus"></div>
+                </div>
+
+                <!-- Isha -->
+                <div class="prayer-card" data-prayer="isha">
+                    <div class="prayer-icon">
+                        <i class="fas fa-star-and-crescent"></i>
+                    </div>
+                    <div class="prayer-info">
+                        <h3 class="prayer-name">Isha</h3>
+                        <p class="prayer-arabic">العشاء</p>
+                        <p class="prayer-time" id="ishaTime">--:--</p>
+                    </div>
+                    <div class="prayer-status" id="ishaStatus"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification Banner -->
+    <section class="notification-banner" id="notificationBanner">
+        <div class="container">
+            <div class="banner-content">
+                <div class="banner-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="banner-text">
+                    <h3>Enable Prayer Notifications</h3>
+                    <p>Never miss a prayer time with browser notifications</p>
+                </div>
+                <button class="btn btn-primary" id="enableNotifications">
+                    <i class="fas fa-bell"></i> Enable Notifications
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings" class="settings-section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="fas fa-cog"></i>
+                Settings
+            </h2>
+            <div class="settings-grid">
+                <!-- Location Settings -->
+                <div class="settings-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                    <div class="settings-content">
+                        <div class="form-group">
+                            <label for="locationMethod">Location Method</label>
+                            <select id="locationMethod">
+                                <option value="auto">Auto-detect (GPS)</option>
+                                <option value="manual">Manual Entry</option>
+                                <option value="city">Select US City</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="citySelectGroup" style="display: none;">
+                            <label for="citySelect">Select City</label>
+                            <select id="citySelect">
+                                <option value="">-- Select a City --</option>
+                                <optgroup label="Alabama">
+                                    <option value="32.3668,-86.3000">Montgomery, AL</option>
+                                    <option value="33.5207,-86.8025">Birmingham, AL</option>
+                                </optgroup>
+                                <optgroup label="Arizona">
+                                    <option value="33.4484,-112.0740">Phoenix, AZ</option>
+                                    <option value="32.2226,-110.9747">Tucson, AZ</option>
+                                </optgroup>
+                                <optgroup label="California">
+                                    <option value="34.0522,-118.2437">Los Angeles, CA</option>
+                                    <option value="37.7749,-122.4194">San Francisco, CA</option>
+                                    <option value="32.7157,-117.1611">San Diego, CA</option>
+                                    <option value="37.3382,-121.8863">San Jose, CA</option>
+                                </optgroup>
+                                <optgroup label="Colorado">
+                                    <option value="39.7392,-104.9903">Denver, CO</option>
+                                </optgroup>
+                                <optgroup label="Florida">
+                                    <option value="25.7617,-80.1918">Miami, FL</option>
+                                    <option value="28.5383,-81.3792">Orlando, FL</option>
+                                    <option value="27.9506,-82.4572">Tampa, FL</option>
+                                    <option value="30.3322,-81.6557">Jacksonville, FL</option>
+                                </optgroup>
+                                <optgroup label="Georgia">
+                                    <option value="33.7490,-84.3880">Atlanta, GA</option>
+                                </optgroup>
+                                <optgroup label="Illinois">
+                                    <option value="41.8781,-87.6298">Chicago, IL</option>
+                                </optgroup>
+                                <optgroup label="Louisiana">
+                                    <option value="30.2241,-92.0198">Lafayette, LA</option>
+                                    <option value="29.9511,-90.0715">New Orleans, LA</option>
+                                    <option value="30.4515,-91.1871">Baton Rouge, LA</option>
+                                </optgroup>
+                                <optgroup label="Massachusetts">
+                                    <option value="42.3601,-71.0589">Boston, MA</option>
+                                </optgroup>
+                                <optgroup label="Michigan">
+                                    <option value="42.3314,-83.0458">Detroit, MI</option>
+                                    <option value="47.1211,-88.5694">Houghton, MI</option>
+                                </optgroup>
+                                <optgroup label="New York">
+                                    <option value="40.7128,-74.0060">New York City, NY</option>
+                                    <option value="42.8864,-78.8784">Buffalo, NY</option>
+                                </optgroup>
+                                <optgroup label="Ohio">
+                                    <option value="39.9612,-82.9988">Columbus, OH</option>
+                                    <option value="41.4993,-81.6944">Cleveland, OH</option>
+                                </optgroup>
+                                <optgroup label="Pennsylvania">
+                                    <option value="39.9526,-75.1652">Philadelphia, PA</option>
+                                    <option value="40.4406,-79.9959">Pittsburgh, PA</option>
+                                </optgroup>
+                                <optgroup label="Texas">
+                                    <option value="29.7604,-95.3698">Houston, TX</option>
+                                    <option value="32.7767,-96.7970">Dallas, TX</option>
+                                    <option value="29.4241,-98.4936">San Antonio, TX</option>
+                                    <option value="30.2672,-97.7431">Austin, TX</option>
+                                </optgroup>
+                                <optgroup label="Washington">
+                                    <option value="47.6062,-122.3321">Seattle, WA</option>
+                                </optgroup>
+                                <optgroup label="Washington D.C.">
+                                    <option value="38.9072,-77.0369">Washington, D.C.</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group manual-location" id="manualLocationGroup" style="display: none;">
+                            <label for="manualLatitude">Latitude</label>
+                            <input type="number" id="manualLatitude" step="0.0001" placeholder="e.g., 30.2241">
+                        </div>
+                        <div class="form-group manual-location" id="manualLongitudeGroup" style="display: none;">
+                            <label for="manualLongitude">Longitude</label>
+                            <input type="number" id="manualLongitude" step="0.0001" placeholder="e.g., -92.0198">
+                        </div>
+                        <button class="btn btn-secondary" id="updateLocation">
+                            <i class="fas fa-sync-alt"></i> Update Location
+                        </button>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-date">Jan 2024 - Aug 2024</div>
-                    <div class="timeline-content">
-                        <h3>Research Assistant</h3>
-                        <h4>Trans Lab | Michigan Tech</h4>
-                        <p>Developed non-contact ultrasonic methods to study concrete mechanical properties, improving construction material analysis with a combination of computer simulations and experiments. Additionally, set up a modern laboratory with essential equipment like a Velmex Unislide and Laser Vibrometer to enhance research capabilities.</p>
+                <!-- Calculation Method Settings -->
+                <div class="settings-card">
+                    <h3><i class="fas fa-calculator"></i> Calculation Method</h3>
+                    <div class="settings-content">
+                        <div class="form-group">
+                            <label for="calculationMethod">Prayer Calculation Method</label>
+                            <select id="calculationMethod">
+                                <option value="ISNA">ISNA (North America)</option>
+                                <option value="MWL">Muslim World League</option>
+                                <option value="Egyptian">Egyptian General Authority</option>
+                                <option value="Makkah">Umm Al-Qura, Makkah</option>
+                                <option value="Karachi">University of Islamic Sciences, Karachi</option>
+                                <option value="Tehran">Institute of Geophysics, Tehran</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="asrMethod">Asr Calculation</label>
+                            <select id="asrMethod">
+                                <option value="Standard">Standard (Shafi'i, Maliki, Hanbali)</option>
+                                <option value="Hanafi">Hanafi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="midnightMethod">Midnight Calculation</label>
+                            <select id="midnightMethod">
+                                <option value="Standard">Standard (Mid Sunset to Sunrise)</option>
+                                <option value="Jafari">Jafari (Mid Sunset to Fajr)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-date">Jan 2019 - Aug 2021</div>
-                    <div class="timeline-content">
-                        <h3>Service Advisor</h3>
-                        <h4>AUDI</h4>
-                        <p>Led the introduction of mild hybrid technology in Bangladesh, enhancing service efficiency, optimizing inventory and supplier management, and ensuring Audi's quality standards through technical and warranty coordination.</p>
+                <!-- Notification Settings -->
+                <div class="settings-card">
+                    <h3><i class="fas fa-bell"></i> Notifications</h3>
+                    <div class="settings-content">
+                        <div class="form-group">
+                            <label class="toggle-label">
+                                <span>Browser Notifications</span>
+                                <input type="checkbox" id="browserNotifications" checked>
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="notificationTime">Notify Before Prayer</label>
+                            <select id="notificationTime">
+                                <option value="0">At prayer time</option>
+                                <option value="5">5 minutes before</option>
+                                <option value="10">10 minutes before</option>
+                                <option value="15" selected>15 minutes before</option>
+                                <option value="30">30 minutes before</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Notify for:</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="notifyFajr" checked> Fajr
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="notifyDhuhr" checked> Dhuhr
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="notifyAsr" checked> Asr
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="notifyMaghrib" checked> Maghrib
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="notifyIsha" checked> Isha
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Settings -->
+                <div class="settings-card">
+                    <h3><i class="fas fa-envelope"></i> Email Reminders</h3>
+                    <div class="settings-content">
+                        <div class="form-group">
+                            <label class="toggle-label">
+                                <span>Enable Email Reminders</span>
+                                <input type="checkbox" id="emailReminders">
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                        <div class="form-group" id="emailInputGroup">
+                            <label for="emailAddress">Your Email Address</label>
+                            <input type="email" id="emailAddress" placeholder="your@email.com">
+                        </div>
+
+                        <!-- EmailJS Configuration -->
+                        <div class="emailjs-config" id="emailjsConfig">
+                            <div class="email-info" style="margin-bottom: 15px;">
+                                <i class="fas fa-info-circle"></i>
+                                <p>To enable email reminders, <a href="https://www.emailjs.com/" target="_blank">sign up for free EmailJS account</a> and enter your credentials below.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjsPublicKey">EmailJS Public Key</label>
+                                <input type="text" id="emailjsPublicKey" placeholder="Your EmailJS public key">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjsServiceId">EmailJS Service ID</label>
+                                <input type="text" id="emailjsServiceId" placeholder="e.g., service_xxxxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjsTemplateId">EmailJS Template ID</label>
+                                <input type="text" id="emailjsTemplateId" placeholder="e.g., template_xxxxxxx">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-secondary" id="saveEmailSettings">
+                            <i class="fas fa-save"></i> Save Email Settings
+                        </button>
+                        <button class="btn btn-secondary" id="testEmail" style="margin-top: 10px;">
+                            <i class="fas fa-paper-plane"></i> Send Test Email
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Display Settings -->
+                <div class="settings-card">
+                    <h3><i class="fas fa-palette"></i> Display</h3>
+                    <div class="settings-content">
+                        <div class="form-group">
+                            <label for="timeFormat">Time Format</label>
+                            <select id="timeFormat">
+                                <option value="12">12-hour (AM/PM)</option>
+                                <option value="24">24-hour</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="toggle-label">
+                                <span>Dark Mode</span>
+                                <input type="checkbox" id="darkMode">
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="toggle-label">
+                                <span>Play Adhan Sound</span>
+                                <input type="checkbox" id="playAdhan">
+                                <span class="toggle-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adjustments Settings -->
+                <div class="settings-card">
+                    <h3><i class="fas fa-sliders-h"></i> Time Adjustments</h3>
+                    <div class="settings-content">
+                        <p class="adjustment-info">Fine-tune prayer times (in minutes)</p>
+                        <div class="adjustments-grid">
+                            <div class="form-group">
+                                <label for="adjustFajr">Fajr</label>
+                                <input type="number" id="adjustFajr" value="0" min="-30" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="adjustDhuhr">Dhuhr</label>
+                                <input type="number" id="adjustDhuhr" value="0" min="-30" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="adjustAsr">Asr</label>
+                                <input type="number" id="adjustAsr" value="0" min="-30" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="adjustMaghrib">Maghrib</label>
+                                <input type="number" id="adjustMaghrib" value="0" min="-30" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label for="adjustIsha">Isha</label>
+                                <input type="number" id="adjustIsha" value="0" min="-30" max="30">
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" id="saveAdjustments">
+                            <i class="fas fa-save"></i> Save Adjustments
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="skills">
+    <!-- Weekly Schedule Section -->
+    <section class="weekly-section">
         <div class="container">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Modeling & Simulation</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">ABAQUS (Standard & Explicit)</span>
-                        <span class="skill-item">Python Scripting</span>
-                        <span class="skill-item">Finite Element Analysis</span>
-                        <span class="skill-item">Multi-scale Modeling</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Programming & Analysis</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">MATLAB</span>
-                        <span class="skill-item">Python</span>
-                        <span class="skill-item">OriginPro</span>
-                        <span class="skill-item">Machine Learning</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Emerging Technologies</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">AI-Powered Systems</span>
-                        <span class="skill-item">VR Simulations</span>
-                        <span class="skill-item">Computer Vision</span>
-                        <span class="skill-item">Non-destructive Testing</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Research & Communication</h3>
-                    <div class="skill-items">
-                        <span class="skill-item">Technical Writing</span>
-                        <span class="skill-item">Conference Presentations</span>
-                        <span class="skill-item">Research Publications</span>
-                        <span class="skill-item">Team Leadership</span>
-                    </div>
-                </div>
+            <h2 class="section-title">
+                <i class="fas fa-calendar-week"></i>
+                Weekly Prayer Schedule
+            </h2>
+            <div class="weekly-table-container">
+                <table class="weekly-table" id="weeklyTable">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Fajr</th>
+                            <th>Sunrise</th>
+                            <th>Dhuhr</th>
+                            <th>Asr</th>
+                            <th>Maghrib</th>
+                            <th>Isha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="weeklyTableBody">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
-    <section id="publications" class="publications">
+    <!-- About Section -->
+    <section id="about" class="about-section">
         <div class="container">
-            <h2 class="section-title">Publications & Awards</h2>
-            <div class="publications-content">
-                <div class="awards">
-                    <h3>Awards & Recognition</h3>
-                    <ul>
-                        <li>Best research abstract award at Southern Biomedical Engineering Conference, 2024, Shreveport, LA</li>
-                        <li>Full tuition aid, Mechanical Engineering Department, University of Louisiana at Lafayette (Fall '21 - present)</li>
-                        <li>Full tuition aid, Civil Engineering Department, Michigan Technological University (Spring '24 - Summer '24)</li>
-                        <li>OIC undergraduate study scholarship, Islamic University of Technology (Jan '14 - Nov '17)</li>
-                    </ul>
+            <h2 class="section-title">
+                <i class="fas fa-info-circle"></i>
+                About This App
+            </h2>
+            <div class="about-content">
+                <div class="about-card">
+                    <i class="fas fa-mosque"></i>
+                    <h3>Accurate Prayer Times</h3>
+                    <p>Prayer times are calculated using precise astronomical algorithms based on your exact location and preferred calculation method.</p>
                 </div>
-                
-                <div class="publications-list">
-                    <h3>Research Publications</h3>
-                    <p>Two research publications authored (details available upon request)</p>
+                <div class="about-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Never Miss a Prayer</h3>
+                    <p>Get timely notifications before each prayer time through browser notifications or email reminders.</p>
                 </div>
+                <div class="about-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>US-Focused</h3>
+                    <p>Optimized for locations across the United States with pre-configured cities and ISNA calculation method.</p>
+                </div>
+                <div class="about-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Customizable</h3>
+                    <p>Adjust calculation methods, notification timing, and display preferences to match your needs.</p>
+                </div>
+            </div>
+            <div class="about-footer">
+                <p>Developed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for the Muslim community</p>
+                <p class="disclaimer">Prayer times are for reference. Please verify with your local mosque for exact times.</p>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>md-saiful.islam1@louisiana.edu</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>337-455-0914</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <a href="https://linkedin.com/in/md-saiful-islam" target="_blank">LinkedIn Profile</a>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
-                        <textarea placeholder="Your Message" rows="5" required></textarea>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Modal -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeProjectModal()">&times;</span>
-            <h2 id="modalTitle">Add New Project</h2>
-            <form id="projectForm">
-                <input type="hidden" id="projectId">
-                <div class="form-group">
-                    <label for="projectTitle">Project Title</label>
-                    <input type="text" id="projectTitle" required>
-                </div>
-                <div class="form-group">
-                    <label for="projectDescription">Description</label>
-                    <textarea id="projectDescription" rows="4" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="projectTechnologies">Technologies Used</label>
-                    <input type="text" id="projectTechnologies" placeholder="Separate with commas">
-                </div>
-                <div class="form-group">
-                    <label for="projectImages">Upload Images/Files</label>
-                    <input type="file" id="projectImages" multiple accept="image/*,.pdf,.dwg,.step,.iges">
-                    <div id="imagePreview" class="image-preview"></div>
-                </div>
-                <div class="form-buttons">
-                    <button type="submit" class="btn btn-primary">Save Project</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeProjectModal()">Cancel</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Md Saiful Islam. All rights reserved.</p>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-mosque"></i>
+                    <span>Namaz Reminder</span>
+                </div>
+                <p class="footer-text">Accurate prayer times for Muslims in the United States</p>
+                <div class="footer-links">
+                    <a href="index.html">Back to Main Site</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Namaz Prayer Reminder. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Audio element for Adhan -->
+    <audio id="adhanAudio" preload="none">
+        <source src="https://www.islamcan.com/audio/adhan/azan1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- EmailJS SDK for email reminders -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="namaz-app.js"></script>
 </body>
 </html>
