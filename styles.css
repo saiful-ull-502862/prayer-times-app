@@ -76,6 +76,23 @@ body {
     width: 100%;
 }
 
+.nav-link-highlight {
+    background: linear-gradient(135deg, #1a5f4a 0%, #2d8a6e 100%);
+    color: #fff !important;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.nav-link-highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(26, 95, 74, 0.3);
+}
+
+.nav-link-highlight::after {
+    display: none;
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
