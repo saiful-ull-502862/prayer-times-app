@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Message - Namaz Prayer Reminder</title>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f5f5f5;">
+  <div style="font-family: system-ui, -apple-system, 'Segoe UI', sans-serif, Arial; font-size: 14px; max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+
+    <!-- Header with Islamic Green -->
+    <div style="background: linear-gradient(135deg, #1a5f4a 0%, #2d8a6e 100%); padding: 25px 20px; text-align: center;">
+      <div style="font-size: 28px; margin-bottom: 8px;">🕌</div>
+      <h1 style="color: #ffffff; margin: 0; font-size: 22px; font-weight: 600;">Namaz Prayer Reminder</h1>
+      <p style="color: #c9a227; margin: 8px 0 0 0; font-size: 13px;">New Message Received</p>
+    </div>
+
+    <!-- Main Content -->
+    <div style="padding: 30px 25px;">
+
+      <!-- Greeting -->
+      <div style="text-align: center; margin-bottom: 25px;">
+        <p style="color: #1a5f4a; font-size: 18px; margin: 0; font-style: italic;">Assalamu Alaikum,</p>
+      </div>
+
+      <!-- Notification Text -->
+      <div style="color: #2c3e50; line-height: 1.6; margin-bottom: 25px;">
+        <p style="margin: 0;">A message from <strong style="color: #1a5f4a;">{{name}}</strong> has been received through the Namaz Prayer Reminder app. Kindly respond at your earliest convenience.</p>
+      </div>
+
+      <!-- Message Card -->
+      <div style="
+        margin: 20px 0;
+        padding: 20px;
+        border-width: 1px 0;
+        border-style: solid;
+        border-color: #e8e8e8;
+        background-color: #fafafa;
+        border-radius: 8px;
+      ">
+        <table role="presentation" style="width: 100%;">
+          <tr>
+            <td style="vertical-align: top; width: 60px;">
+              <div style="
+                padding: 12px 14px;
+                background: linear-gradient(135deg, #1a5f4a 0%, #2d8a6e 100%);
+                border-radius: 50%;
+                font-size: 24px;
+                text-align: center;
+              " role="img">👤</div>
+            </td>
+            <td style="vertical-align: top; padding-left: 15px;">
+              <div style="color: #1a5f4a; font-size: 17px; font-weight: 600; margin-bottom: 4px;">
+                {{name}}
+              </div>
+              <div style="color: #888888; font-size: 12px; margin-bottom: 12px;">
+                📅 {{time}}
+              </div>
+              <div style="
+                background-color: #ffffff;
+                padding: 15px;
+                border-radius: 6px;
+                border-left: 3px solid #c9a227;
+              ">
+                <p style="font-size: 15px; color: #333333; margin: 0; line-height: 1.6;">{{message}}</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Action Note -->
+      <div style="
+        background-color: #f0f7f4;
+        border: 1px solid #d4e9e2;
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 25px;
+      ">
+        <p style="margin: 0; color: #1a5f4a; font-size: 13px;">
+          💡 <strong>Tip:</strong> Please reply promptly to maintain good communication with your community members.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div style="
+      background-color: #1a5f4a;
+      padding: 20px;
+      text-align: center;
+    ">
+      <p style="color: #c9a227; font-size: 13px; margin: 0 0 10px 0; font-style: italic;">
+        "Indeed, prayer has been decreed upon the believers a decree of specified times."
+      </p>
+      <p style="color: #a8d5c5; font-size: 11px; margin: 0;">
+        — Quran 4:103
+      </p>
+      <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #2d8a6e;">
+        <p style="color: #ffffff; font-size: 12px; margin: 0;">
+          Namaz Prayer Reminder App
+        </p>
+        <p style="color: #888888; font-size: 11px; margin: 5px 0 0 0;">
+          Accurate prayer times for Muslims in the United States
+        </p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
