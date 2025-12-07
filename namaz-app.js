@@ -225,22 +225,41 @@ class NamazReminderApp {
         this.locationName = 'Lafayette, LA';
         this.prayerTimes = {};
         this.notificationTimers = [];
+        this.emailTimers = [];
         this.countdownInterval = null;
         this.is24Hour = false;
+        this.emailjsInitialized = false;
 
         this.init();
     }
 
     async init() {
         this.loadSettings();
+        this.initEmailJS();
         this.setupEventListeners();
         await this.detectLocation();
         this.updatePrayerTimes();
         this.updateUI();
         this.startCountdown();
         this.scheduleNotifications();
+        this.scheduleEmailReminders();
         this.generateWeeklySchedule();
         this.checkNotificationPermission();
+    }
+
+    // Initialize EmailJS
+    initEmailJS() {
+        const settings = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '{}');
+        if (settings.emailjsPublicKey && typeof emailjs !== 'undefined') {
+            try {
+                emailjs.init(settings.emailjsPublicKey);
+                this.emailjsInitialized = true;
+                console.log('EmailJS initialized successfully');
+            } catch (error) {
+                console.warn('EmailJS initialization failed:', error);
+                this.emailjsInitialized = false;
+            }
+        }
     }
 
     // Load settings from localStorage
@@ -285,6 +304,9 @@ class NamazReminderApp {
             darkMode: document.body.classList.contains('dark-mode'),
             emailAddress: document.getElementById('emailAddress')?.value || '',
             emailReminders: document.getElementById('emailReminders')?.checked || false,
+            emailjsPublicKey: document.getElementById('emailjsPublicKey')?.value || '',
+            emailjsServiceId: document.getElementById('emailjsServiceId')?.value || '',
+            emailjsTemplateId: document.getElementById('emailjsTemplateId')?.value || '',
             browserNotifications: document.getElementById('browserNotifications')?.checked || true,
             notificationTime: document.getElementById('notificationTime')?.value || '15',
             playAdhan: document.getElementById('playAdhan')?.checked || false,
@@ -298,6 +320,15 @@ class NamazReminderApp {
         };
 
         localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify(settings));
+
+        // Reinitialize EmailJS if credentials changed
+        if (settings.emailjsPublicKey) {
+            this.initEmailJS();
+        }
+
+        // Reschedule email reminders
+        this.scheduleEmailReminders();
+
         this.showToast('Settings saved successfully', 'success');
     }
 
@@ -338,6 +369,9 @@ class NamazReminderApp {
         }
 
         setInput('emailAddress', settings.emailAddress);
+        setInput('emailjsPublicKey', settings.emailjsPublicKey);
+        setInput('emailjsServiceId', settings.emailjsServiceId);
+        setInput('emailjsTemplateId', settings.emailjsTemplateId);
 
         if (settings.adjustments) {
             setInput('adjustFajr', settings.adjustments.fajr || 0);
@@ -688,6 +722,150 @@ class NamazReminderApp {
         };
     }
 
+    // Schedule email reminders for prayers
+    scheduleEmailReminders() {
+        // Clear existing email timers
+        this.emailTimers.forEach(timer => clearTimeout(timer));
+        this.emailTimers = [];
+
+        const settings = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '{}');
+
+        // Check if email reminders are enabled and configured
+        if (!settings.emailReminders) return;
+        if (!settings.emailAddress) return;
+        if (!settings.emailjsPublicKey || !settings.emailjsServiceId || !settings.emailjsTemplateId) {
+            console.log('EmailJS not fully configured');
+            return;
+        }
+
+        const notifyMinutes = parseInt(settings.notificationTime || '15');
+        const notifyPrayers = settings.notifyPrayers || {};
+        const prayers = ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'];
+        const now = new Date();
+
+        prayers.forEach(prayer => {
+            if (notifyPrayers[prayer] === false) return;
+            if (!this.prayerTimes[prayer]) return;
+
+            const prayerTime = this.calculator.getTimeAsDate(this.prayerTimes[prayer], now);
+            const notifyTime = new Date(prayerTime.getTime() - notifyMinutes * 60 * 1000);
+
+            if (notifyTime > now) {
+                const delay = notifyTime - now;
+                const timer = setTimeout(() => {
+                    this.sendEmailReminder(prayer, prayerTime, settings);
+                }, delay);
+                this.emailTimers.push(timer);
+            }
+        });
+
+        if (this.emailTimers.length > 0) {
+            console.log(`Scheduled ${this.emailTimers.length} email reminders`);
+        }
+    }
+
+    // Send email reminder via EmailJS
+    async sendEmailReminder(prayer, prayerTime, settings) {
+        if (!this.emailjsInitialized || typeof emailjs === 'undefined') {
+            console.warn('EmailJS not initialized');
+            return;
+        }
+
+        const prayerNames = {
+            fajr: 'Fajr',
+            dhuhr: 'Dhuhr',
+            asr: 'Asr',
+            maghrib: 'Maghrib',
+            isha: 'Isha'
+        };
+
+        const templateParams = {
+            to_email: settings.emailAddress,
+            prayer_name: prayerNames[prayer],
+            prayer_time: prayerTime.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }),
+            location: this.locationName,
+            date: new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }),
+            hijri_date: HijriDateCalculator.format(new Date())
+        };
+
+        try {
+            await emailjs.send(
+                settings.emailjsServiceId,
+                settings.emailjsTemplateId,
+                templateParams
+            );
+            console.log(`Email reminder sent for ${prayerNames[prayer]}`);
+            this.showToast(`Email reminder sent for ${prayerNames[prayer]}`, 'success');
+        } catch (error) {
+            console.error('Failed to send email reminder:', error);
+            this.showToast('Failed to send email reminder', 'error');
+        }
+    }
+
+    // Send test email
+    async sendTestEmail() {
+        const settings = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY) || '{}');
+
+        if (!settings.emailAddress) {
+            this.showToast('Please enter your email address first', 'warning');
+            return;
+        }
+
+        if (!settings.emailjsPublicKey || !settings.emailjsServiceId || !settings.emailjsTemplateId) {
+            this.showToast('Please configure EmailJS credentials first', 'warning');
+            return;
+        }
+
+        if (!this.emailjsInitialized) {
+            this.initEmailJS();
+        }
+
+        if (typeof emailjs === 'undefined') {
+            this.showToast('EmailJS library not loaded', 'error');
+            return;
+        }
+
+        const templateParams = {
+            to_email: settings.emailAddress,
+            prayer_name: 'Test Prayer',
+            prayer_time: new Date().toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            }),
+            location: this.locationName,
+            date: new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }),
+            hijri_date: HijriDateCalculator.format(new Date())
+        };
+
+        try {
+            this.showToast('Sending test email...', 'info');
+            await emailjs.send(
+                settings.emailjsServiceId,
+                settings.emailjsTemplateId,
+                templateParams
+            );
+            this.showToast('Test email sent successfully! Check your inbox.', 'success');
+        } catch (error) {
+            console.error('Failed to send test email:', error);
+            this.showToast(`Failed to send email: ${error.text || error.message || 'Unknown error'}`, 'error');
+        }
+    }
+
     // Generate weekly prayer schedule
     generateWeeklySchedule() {
         const tbody = document.getElementById('weeklyTableBody');
@@ -901,6 +1079,14 @@ class NamazReminderApp {
         if (saveEmailSettings) {
             saveEmailSettings.addEventListener('click', () => {
                 this.saveSettings();
+            });
+        }
+
+        // Test email button
+        const testEmailBtn = document.getElementById('testEmail');
+        if (testEmailBtn) {
+            testEmailBtn.addEventListener('click', () => {
+                this.sendTestEmail();
             });
         }
 

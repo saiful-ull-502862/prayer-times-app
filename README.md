@@ -142,11 +142,67 @@ The app uses the standard astronomical formula for calculating prayer times:
 - Location data is only used for prayer time calculations
 - No personal data is sent to external servers
 
-## Email Reminders (Coming Soon)
-Email reminder functionality requires a backend service. Options include:
-- EmailJS integration (client-side)
-- Custom backend with Node.js/Python
-- Cloud functions (AWS Lambda, Google Cloud Functions)
+## Email Reminders Setup (EmailJS)
+
+The app uses [EmailJS](https://www.emailjs.com/) for sending email reminders - a free client-side email service.
+
+### Step 1: Create EmailJS Account
+1. Go to [emailjs.com](https://www.emailjs.com/) and sign up (free tier: 200 emails/month)
+2. Verify your email address
+
+### Step 2: Add Email Service
+1. Go to **Email Services** in your EmailJS dashboard
+2. Click **Add New Service**
+3. Choose your email provider (Gmail, Outlook, etc.)
+4. Follow the connection instructions
+5. Note down your **Service ID** (e.g., `service_xxxxxxx`)
+
+### Step 3: Create Email Template
+1. Go to **Email Templates** in your EmailJS dashboard
+2. Click **Create New Template**
+3. Set up your template with these variables:
+   - `{{to_email}}` - Recipient email
+   - `{{prayer_name}}` - Name of the prayer (Fajr, Dhuhr, etc.)
+   - `{{prayer_time}}` - Time of the prayer
+   - `{{location}}` - User's location
+   - `{{date}}` - Gregorian date
+   - `{{hijri_date}}` - Islamic date
+
+**Example Template:**
+```
+Subject: Prayer Reminder: {{prayer_name}} at {{prayer_time}}
+
+Assalamu Alaikum,
+
+This is a reminder that {{prayer_name}} prayer time is approaching.
+
+Prayer Time: {{prayer_time}}
+Location: {{location}}
+Date: {{date}}
+Hijri Date: {{hijri_date}}
+
+May Allah accept your prayers.
+
+- Namaz Prayer Reminder App
+```
+
+4. Save and note down your **Template ID** (e.g., `template_xxxxxxx`)
+
+### Step 4: Get Your Public Key
+1. Go to **Account** > **General** in EmailJS dashboard
+2. Copy your **Public Key**
+
+### Step 5: Configure in App
+1. Open the Namaz Reminder app
+2. Go to **Settings** > **Email Reminders**
+3. Enable email reminders
+4. Enter your email address
+5. Enter your EmailJS credentials:
+   - Public Key
+   - Service ID
+   - Template ID
+6. Click **Save Email Settings**
+7. Click **Send Test Email** to verify
 
 ## Contributing
 Contributions are welcome! Please feel free to submit issues or pull requests.

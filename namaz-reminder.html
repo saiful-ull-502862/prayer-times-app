@@ -369,15 +369,35 @@
                             </label>
                         </div>
                         <div class="form-group" id="emailInputGroup">
-                            <label for="emailAddress">Email Address</label>
+                            <label for="emailAddress">Your Email Address</label>
                             <input type="email" id="emailAddress" placeholder="your@email.com">
                         </div>
-                        <div class="email-info">
-                            <i class="fas fa-info-circle"></i>
-                            <p>Email reminders require a backend service. For now, you can use browser notifications or set up EmailJS integration.</p>
+
+                        <!-- EmailJS Configuration -->
+                        <div class="emailjs-config" id="emailjsConfig">
+                            <div class="email-info" style="margin-bottom: 15px;">
+                                <i class="fas fa-info-circle"></i>
+                                <p>To enable email reminders, <a href="https://www.emailjs.com/" target="_blank">sign up for free EmailJS account</a> and enter your credentials below.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjsPublicKey">EmailJS Public Key</label>
+                                <input type="text" id="emailjsPublicKey" placeholder="Your EmailJS public key">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjsServiceId">EmailJS Service ID</label>
+                                <input type="text" id="emailjsServiceId" placeholder="e.g., service_xxxxxxx">
+                            </div>
+                            <div class="form-group">
+                                <label for="emailjsTemplateId">EmailJS Template ID</label>
+                                <input type="text" id="emailjsTemplateId" placeholder="e.g., template_xxxxxxx">
+                            </div>
                         </div>
+
                         <button class="btn btn-secondary" id="saveEmailSettings">
                             <i class="fas fa-save"></i> Save Email Settings
+                        </button>
+                        <button class="btn btn-secondary" id="testEmail" style="margin-top: 10px;">
+                            <i class="fas fa-paper-plane"></i> Send Test Email
                         </button>
                     </div>
                 </div>
@@ -537,6 +557,8 @@
         <source src="https://www.islamcan.com/audio/adhan/azan1.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- EmailJS SDK for email reminders -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="namaz-app.js"></script>
 </body>
 </html>
